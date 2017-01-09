@@ -26,7 +26,7 @@ class HashidStrategy implements StrategyInterface
      *
      * @param string $salt Random alpha-numeric set.
      */
-    public function __construct($salt = null)
+    public function __construct($salt = null, $charset=null)
     {
         if ($salt === null) {
             $salt = Configure::read('Obfuscate.salt');
@@ -35,7 +35,7 @@ class HashidStrategy implements StrategyInterface
             throw new \Exception('Missing salt for Hashid strategy');
         }
         $this->_salt = $salt;
-        $this->_hashid = new Hashids($salt);
+        $this->_hashid = new Hashids($salt, 0, $charset);
     }
 
     /**
